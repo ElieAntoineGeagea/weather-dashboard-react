@@ -45,7 +45,8 @@ input {
   line-height: 1.6;
 }
 
-.search-section {
+.search-section,
+.weather-card {
   padding: 1.5rem;
   border-radius: 1rem;
   background: #1e293b;
@@ -77,6 +78,10 @@ input::placeholder {
   color: #94a3b8;
 }
 
+input[aria-invalid="true"] {
+  border-color: #fca5a5;
+}
+
 button {
   padding: 0.9rem 1.4rem;
   border: none;
@@ -104,9 +109,138 @@ button:focus-visible {
   line-height: 1.4;
 }
 
+.weather-content {
+  margin-top: 1.5rem;
+}
+
 .status-message {
   text-align: center;
   overflow-wrap: anywhere;
+}
+
+.loading-message,
+.error-message {
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.loading-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgb(56 189 248 / 15%);
+  color: #bae6fd;
+}
+
+.error-message {
+  background: rgb(248 113 113 / 15%);
+  color: #fecaca;
+}
+
+.loading-message p,
+.error-message p {
+  margin: 0;
+}
+
+.spinner {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  border: 3px solid rgb(186 230 253 / 30%);
+  border-top-color: #bae6fd;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.weather-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #475569;
+}
+
+.weather-header > div {
+  min-width: 0;
+}
+
+.weather-header h2 {
+  margin: 0 0 0.25rem;
+  color: #38bdf8;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  overflow-wrap: anywhere;
+}
+
+.weather-description {
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.5;
+  text-transform: capitalize;
+}
+
+.weather-icon {
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.temperature {
+  margin: 0;
+  padding: 2rem 0;
+  text-align: center;
+  font-size: clamp(3.2rem, 10vw, 4rem);
+  font-weight: bold;
+}
+
+.weather-details {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.weather-detail {
+  min-width: 0;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  background: #334155;
+  text-align: center;
+}
+
+.weather-detail h3 {
+  margin: 0 0 0.4rem;
+  color: #cbd5e1;
+  font-size: 1rem;
+}
+
+.weather-detail p {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 650px) {
+  .weather-app {
+    padding: 3rem 1.5rem;
+  }
+
+  .weather-card {
+    padding: 2rem;
+  }
+
+  .weather-details {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 500px) {
@@ -116,5 +250,16 @@ button:focus-visible {
 
   button {
     width: 100%;
+  }
+
+  .weather-header {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
   }
 }
